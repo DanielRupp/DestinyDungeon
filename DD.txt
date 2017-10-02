@@ -1,0 +1,214 @@
+
+
+public class TextController : MonoBehaviour {
+		//Creates variable called text. Text is the access modifier.
+		public Text text;
+		private enum States {entrance_1, entrance_2, entrance_3, cavern_1, cavern_2, darkness, cavern_3, inners, cell, hurt, destiny, male, female, death};
+		private States myState;
+		private enum Character {Male, Female};
+		private Character myChar;
+		private int score;
+		
+		
+		void Start () {
+		text.text = "Welcome to Destiny Dungeon...";
+			myState = States.entrance
+			score = 0;
+		}
+		
+		//Update method will keep the game in a method state, states refer to what you are currently seeing/ doing
+		void Update () {
+				print(myState);
+				if (myState == States.entrance_1)		 {state_entrance_1();} 
+				else if (myState == States.entrance_2)	 {state_entrance_2();}
+				else if (myState == States.entrance_3) 	{states_entrance_3();}
+				else if (myState == States.cavern_1) 		{states_cavern_1();}
+				else if (myState == States.cavern_2) {states_cavern_2();}
+				else if (myState == States.cavern_2) {states_cavern_2();}
+				else if (myState == States.darkness) {states_darkness();}
+				else if (myState == States.cavern_3) {states_cavern_3();}
+				else if (myState == States.inners) 	 {states_innsers();}
+				else if (myState == States.hurt) 	{states_hurt();}
+				else if (myState == States.destiny) {states_destiny();}
+				else if (myState == States.death) {states_death();}
+						}
+		
+		
+		void state_entrance_1 (){
+							text.text = "You come before an entrance to what looks like an old temple, though you do not know how you've come here you hear a voice speak to you.\n\n" +
+		"Press Space to listen to the voice...";
+			if (Input.GetKeyDown(Keycode.Space)) {
+							text.text= "Welcome to your Destiny...but first, with whom do I speak? Are you a boy or a girl?\n\n" +
+							"Press M for Male or F for Female." };
+			if (Input.GetKeyDown(KeyCode.M)) {
+				myChar = Male
+							text.text = "A bright young fellow aren't you?\n" + "Press Enter to continue...";
+				if (Input.GetKeyDown(Keycode.Enter)) 
+				myState = States.entrance_2 };
+			else if (Input.GetKeyDown(KeyCode.F))
+													{
+				myChar = Female
+							text.text = "A fair maiden aren't thou?\n" + "Press Enter to continue...";
+				if (Input.GetKeyDown(Keycode.Enter)) 
+				myState = States.entrance_2 };
+		
+		void state_entrance_2 () {
+							text.text= "It seems you have come from afar to find out your destiny? Before you enter tell me, which do you choose, power, wisdom, or Fame?\n\n" + "Press P for Power, Press W for Wisdom, Press F for Fame";
+			if (Input.GetKeyDown(Keycode.P)) {
+							text.text= "Ah so you prefer Power? A little hot headed aren't you?\n\n" + "Press ENTER to continue...";
+			if (Input.GetKeyDown(Keycode.Enter)) 
+				myState = States.Entrance_3};
+				score += 1 ;
+			else if (Input.GetKeyDown(Keycode.W)) {
+							text.text= "Ah so you prefer Wisdom? A wise choice.\n\n" + "Press ENTER to continue...";
+				if (Input.GetKeyDown(Keycode.Enter)) 
+				myState = States.Entrance_3};
+				score += 2;
+			else if (Input.GetKeyDown(Keycode.F)) {
+							text.text= "Fame, an interesting choice, interesting enough to get you killed.\n\n" + "Press ENTER to continue...";
+				if (Input.GetKeyDown(Keycode.Enter)) 
+				myState = States.Entrance_3};
+				score += -1;
+			}
+		void state_entrance_3 () {
+							text.text= "Last thing before you enter. Do mind your head on the way in...\n\n" + "Press SPACE to continue.\n" + "Press CTRL to duck first.";
+				if (Input.GetKeyDown(Keycode.Space)) {
+							text.text= "You rush forward too quickly and hit your head, knocking yourself out.\n" + "When you reawaken you find that you've lost all of your money, too bad.";
+				myState = States.cavern_1
+				score += -3
+			else if (Input.GetKeyDown(Keycode.CTRL)) {
+							text.text= "You duck just before walking in missing a giant stone which you definitely would have hit your head on.";
+				myState= States.cavern_1;
+				score += 3;
+				
+		void state_caverns_1 () {
+							text.text= "You look around and see a room filled with many items. Ahead you see the entrance to the next room. Before you go on which items do you take?\n" + "Press G to take as much gold as you can, Press S to take a Sword, Press T to take a torch, Press W to take a wand.";
+				if (Input.GetKeyDown(Keycode.G)) score += -3; {
+							text.text= You took the gold. You greedy bastard.\n" + "Press Enter to Continue."
+				if (Input.GetKeyDown(Keycode.Enter))			{myState= States.cavern_2};
+				else if (Input.GetKeyDown(Keycode.S)) score += 1; {
+							text.text= You took the sword, always good in tight corners.\n" + "Press Enter to Continue."
+				if (Input.GetKeyDown(Keycode.Enter))			{myState= States.cavern_2};
+				else if (Input.GetKeyDown(Keycode.T)) score += 2; {
+							text.text= You took the torch, maybe this will be of use.\n" + "Press Enter to Continue."
+				if (Input.GetKeyDown(Keycode.Enter))			{myState= States.cavern_2};
+				else if (Input.GetKeyDown(Keycode.W)) score += 4; {
+							text.text= You took the wand. Do you even know if you can use this thing?.\n" + "Press Enter to Continue."
+				if (Input.GetKeyDown(Keycode.Enter))			{myState= States.cavern_2};
+			
+		void state_caverns_2 () {
+
+							text.text "Moving into the next room you hear a SLAM behind you. The door is shut tightly. Suddenly the room behinds to fill with a crap ton of snakes, all of them looking more venemous than the next. What do you do?\n" + "Press S to try and break the door down, Press G to stay, "Forget it!" the make a break for the next room, press E to examine the room!";
+				if (Input.GetKeyDown(Keycode.G)) score += -3 {
+							text.text = "You quickly run across the room, the snakes go and bite at you and get you in the leg, however you quickly get to the next room and the door shuts behind you\n" + "Press Enter to Continue."
+				if (Input.GetKeyDown(Keycode.Enter))			{myState= states.hurt} };
+				else if (Input.GetKeyDown(Keycode.S)) {
+							text.text = "The door won't budge, perhaps you should check your other options.\n" + "Press Enter to go back."
+				if (Input.GetKeyDown(Keycode.Enter)) 			{myState = states.caverns_2} };
+				else if (Input.GetKeyDown(Keycode.E)) score += 3 {
+							text.text = "You look around the room and see that there is a lit torch near to you which you can reach. You also see that above you is a rope which you can use to swing yourself across the room. Which do you choose?\n" + "Press T for torch, R for Rope";
+				if (Input.GetKeyDown(Keycode.T)) score += 2 {
+							text.text = "With a spark of genius you quickly grab the torch and begin flailing it in front of the snakes. The snakes are undeterred by the torch and start biting at you.\n" + "Press Enter to Continue.";
+				if (Input.GetKeyDown(Keycode.Enter)	{myState= States.death}};
+				else if (Input.GetKeyDown(Keycode.R)) score += 3 {
+							text.text = "You quickly jump up and grab the rope, the snakes can no longer reach you. Using your weight you manage to swing yourself to the otherside of the room and enter. The door closes behind you, thankfully.\n" + "Press Enter to Continue.";
+				if (Input.GetKeyDown(Keycode.Enter) 			{myState = States.caverns_3}};
+				
+		void state_cavern_3 () {
+							text.text = "Phew that was a close one wasn't it. After all that you take a look around and see what looks like an Owl perched atop a statue of a man and a woman embracing one another. The Owl hoots at you.\n" + "Press ENTER to continue."
+				if (Input.GetKeyDown(Keycode.Enter) {
+							text.text = "What is stronger than rock, yet softer than cotton, sharp in a pack, yet brittle on its own?\n" + "You think of a few answers to the riddle...\n" + "Press A for a bundle of arrows.\n" + "Press F for Family.\n" + "Press P for Perseverance."};
+				if (Input.GetKeyDown(KeyCode.A) score += -1" {
+							text.text = "The Owl swoops down at you for answering incorrectly.\n" + "Press ENTER to continue";
+				if (Input.GetKeyDown(Keycode.Enter) 		{myState= States.death}};
+				else if (Input.GetKeyDown(Keycode.F) score += 1 {
+							text.text = "The Owl nods its head, and a passageway opens up, you enter giving the owl a nod back.\n" + "Press ENTER to continue";
+				if (Input.GetKeyDown(Keycode.Enter) 		{myState= States.inners}};
+				else if {Input.GetKeyDown(KeyCode.P) score += 1 {
+							text.text = "The owl looks at you, you notice that the statue seems to look at you as well. Suddenly a great darkness engulfs the room and you feel yourself being lifted off the ground.\n" + "Press ENTER to continue";
+				if (Input.GetKeyDown(Keycode.Enter) 		{myState= States.darkness}};
+				};
+		
+		void state_inners () {
+		
+		
+		
+		}
+		void state_darkness () {
+		}
+		
+		void state_hurt () {
+						text.text = "You're hurt and you feel yourself losing strength fast. You panic and begin rummaging through your pockets. Two things fall out of them, a small cell phone, and a note which says.../n" + "If you need help just call Dan (A number is jotted down as well). What do you do?/n" + "Press C to call Dan, Press D to just die and start over because you don't need Dan.";}
+			if (Input.GetKeyDown(Keycode.C) score += -1 {
+						text.text "Hello? The familiar voice says through the phone. You quickly explained what happened to which there is little response./n" + "Just suck out the venmon and press enter, I'm done coding the rest of the game.";
+			if (Input.GetKeyDown(Keycode.Enter) 			{myState = States.caverns_3};
+			else if (Input.GetKeyDown(Keycode.C) score += -3 {myState = States.death};
+			
+			
+		
+		void state_death () {
+						text.text = "You died too bad, press enter to see your score."
+			if (Input.GetKeyDown(Keycode.Enter))
+		//input score method here.				
+		]
+		void state_destiny () { 
+						text.text = "You've made it to the end, and now your destiny awaits, just press ENTER to see what it is..."
+			if (Input.GetKeyDown(keyCode.Enter))
+		//input score method here.
+		
+		
+		void_score_death () {
+		if score = 1 {text.text = "You are a horrible person, you're Destiny stinks."}
+		else if score == 2 {text.text = "How are you so stupid? You're destined to work at McDonalds."}
+		else if score == 3 {text.text = "You're a little under the average Joe, but you can improve."}
+		else if score == 4 {text.text = "You will live a generally stressful life, but don't we all?"}
+		else if score == 5 {text.text = "Hardships await you ahead, but you hold the power, knowledge, and fame to overcome them."}
+		else if score == 6 {text.text = "Your destiny is clear, you will be fruitful.}
+		else if score == 7 {text.text = "Great job you beat the game."} 
+		
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		}
+			
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
